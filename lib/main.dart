@@ -1,39 +1,3 @@
-Claude
-නියමයි, ඔයා හරියටම හරි තැනයි ඉන්නේ. “Use workflow from main” කියලා පොඩි window එකක් open වෙලා තියෙනවා.
-
-ඒ window එක ඇතුළේ තියෙන කොළ පාට Run workflow බොත්තම ඔබන්න (Cancel එකට දකුණින් තියෙන එක, ඔයාගේ screenshot එකේ පහළ දකුණේ).
-එතකොට window එක වැහිලා යනවා. තත්පර කිහිපයක් ඉඳලා page එක refresh කරන්න (page එක පහළට ඇදලා).
-“Create build-apk.yml” කියන රතු ✗ run එකට උඩින් අලුත් run එකක් එනවා, කහ පාට කැරකෙන ලකුණක් සහිතව. ඒ කියන්නේ build එක පටන් අරන්.
-විනාඩි 5-10ක් බලාගෙන ඉන්න, ඒ අතරේ page එක refresh කරන්න (නැත්නම් ඒක තත්පර 30කට සැරයක් ඉබේම refresh වෙනවා).
-
-කොළ ✓ ලකුණක් ආවොත්: ඒ run එක ඔබලා, පහළට scroll කරලා Artifacts වල තියෙන voice-translator-apk download කරන්න.
-රතු ✗ ලකුණක් ආවොත්: ඒ run එක ඔබලා, කලින් වගේම රතු ✗ සහිත step එක open කරලා screenshot එකක් upload කරන්න.
-ඒ ✓ හෝ ✗ ලකුණ දැක්කම මට කියන්න.
-
-Screenshot_20261026_235537_com_android_chrome_ChromeTabbedActivity.jpg
-Drafting a workaround to locate the file regardless of folder name
-Build #2 ත් ✗ වුණා. ඒත් මට හිතෙන හේතුවක් තියෙනවා.
-
-ඔයා කලින් පණිවිඩයක folder නම type කළේ Iib කියලා (මුල අකුර ලොකු I, ඉංග්‍රීසි i ලොකුවට). GitHub අකුරු වල ලොකු I සහ කුඩා l එකම වගේ පේනවා. ඒ නිසා folder එක lib වගේ පේන්නේ, ඒත් ඇත්තටම නම Iib වෙන්න පුළුවන්. එතකොට build server එකට lib/main.dart හොයාගන්න බැරි වෙනවා, කලින් error එකත් ඒක තමයි.
-
-ඒක නිවැරදි කරන්න, නම හරියටම කලින්ම පිරිලා එන link එකකින් file එක ආයෙත් හදමු:
-
-අලුත් tab එකක් open කරලා (උඩ + ඔබලා) මේ link එක paste කරන්න:
-https://github.com/somalal/Voice-translator/new/main?filename=lib/main.dart
-Enter ඔබන්න. නම lib/main.dart කියලා කලින්ම පිරිලා ඇති. නම අතින් ටයිප් කරන්න එපා.
-පහළ ලොකු edit box එකේ main.dart code එක paste කරන්න. මම දීපු main.dart file එක open කරලා, අකුරු ඔක්කොම copy කරන්න.
-උඩ දකුණේ කොළ Commit changes... ඔබලා, එන window එකේ නැවත Commit changes ඔබන්න.
-Commit කළාම build එක ඉබේම පටන් ගන්නවා, ආයෙත් Run workflow ඔබන්න ඕනෙ නැහැ. Actions tab එකට ගිහින් විනාඩි 5-10ක් බලන්න.
-
-එක දෙයක් වෙන්න පුළුවන්: step 2 දී “A file with that name already exists” වගේ පණිවිඩයක් ආවොත්, ඒ කියන්නේ lib නම හරි, එතකොට මගේ අනුමානය වැරදියි. එහෙම වුණොත් ඒ screenshot එක upload කරන්න, මම වෙන හේතුවක් හොයන්නම්.
-
-ඒ වගේම ඊළඟට ✗ ආවොත්, මේ වතාවේ build ඔබලා, රතු ✗ ලකුණ තියෙන step එක open කරලා ඒකේ screenshot එක upload කරන්න, එතකොට හරියටම මොකක්ද කියලා බලන්න පුළුවන්.
-
-main.dart code එක නරවත දෙන්න
-
-මේ තියෙන්නේ සම්පූර්ණ main.dart code එක. Code box එකේ උඩ දකුණු කෙළවරේ තියෙන copy ලකුණ ඔබලා copy කරන්න, ඒ වගේම import 'package:flutter/material.dart'; කියන පළමු පේළියේ සිට } කියන අන්තිම පේළිය දක්වා ඔක්කොම copy වෙනවද බලන්න.
-
-dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -208,9 +172,59 @@ class _HomePageState extends State<HomePage> {
               maxLines: 5,
               style: const TextStyle(fontSize: 18),
               decoration: const InputDecoration(
-
-
-
-
-Claude is AI and can make mistakes.
-Claude is responding
+                  labelText: 'ඔයා කිව්වේ', border: OutlineInputBorder()),
+              onSubmitted: (_) => _translate(),
+            ),
+            const SizedBox(height: 12),
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                    color: cs.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(12)),
+                child: SingleChildScrollView(
+                  child: SelectableText(
+                      output.isEmpty ? 'පරිවර්තනය මෙතන පෙනෙනවා...' : output,
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: output.isEmpty ? cs.outline : cs.onSurface)),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              TextButton.icon(
+                  onPressed: output.isEmpty ? null : () => _speak(output),
+                  icon: const Icon(Icons.volume_up),
+                  label: const Text('නැවත ඇසෙන්න')),
+              TextButton.icon(
+                  onPressed: output.isEmpty
+                      ? null
+                      : () => Clipboard.setData(ClipboardData(text: output)),
+                  icon: const Icon(Icons.copy),
+                  label: const Text('Copy')),
+              TextButton.icon(
+                  onPressed: busy ? null : _translate,
+                  icon: const Icon(Icons.translate),
+                  label: const Text('පරිවර්තනය')),
+            ]),
+            Text(status, style: TextStyle(color: cs.outline)),
+            const SizedBox(height: 8),
+            SizedBox(
+              width: 80,
+              height: 80,
+              child: FloatingActionButton(
+                shape: const CircleBorder(),
+                backgroundColor: listening ? cs.error : cs.primary,
+                foregroundColor: listening ? cs.onError : cs.onPrimary,
+                onPressed: sttReady ? _toggleMic : null,
+                child: Icon(listening ? Icons.stop : Icons.mic, size: 38),
+              ),
+            ),
+          ]),
+        ),
+      ),
+    );
+  }
+}
